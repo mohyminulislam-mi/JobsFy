@@ -1,5 +1,6 @@
 import Features from "@/components/Home/Features";
 import Hero from "@/components/Home/Hero";
+import PopularCategories from "@/components/Home/PopularCategories";
 import TrustedCompanies from "@/components/Home/TrustedCompanies";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <Hero />
       <TrustedCompanies />
       <Features />
+      <PopularCategories />
     </>
   );
 };
