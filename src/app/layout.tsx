@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JobsFy | Get your dream jobs",
-  description: "Get your dream jobs",
+  title: "Jobfy - Find Jobs & Hire Talent Faster",
+  description:
+    "A modern job marketplace platform with built-in AI assistant and real-time social networking features.",
 };
 
 export default function RootLayout({
@@ -23,12 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
