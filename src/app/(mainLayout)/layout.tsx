@@ -1,19 +1,19 @@
+import React from "react";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 
-const Home = () => {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header>
         <Header />
       </header>
-      <main>
-        <h1>Hello</h1>
-      </main>
+      <main>{children}</main>
       <footer>
         <Footer />
       </footer>
     </>
   );
 };
-export default Home;
+
+export default MainLayout;
