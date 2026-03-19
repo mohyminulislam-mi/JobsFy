@@ -5,10 +5,10 @@ import Header from "@/components/shared/Header";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <header>
+      <header className="sticky top-0 z-50 ">
         <Header />
       </header>
-      <main>{children}</main>
+      <main className="min-h-screen">{children}</main>
       <footer>
         <Footer />
       </footer>
