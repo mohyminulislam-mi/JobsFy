@@ -1,3 +1,4 @@
+import FeaturedJobs from "@/components/Home/FeaturedJobs";
 import Features from "@/components/Home/Features";
 import Hero from "@/components/Home/Hero";
 import PopularCategories from "@/components/Home/PopularCategories";
@@ -11,6 +12,7 @@ const Home = () => {
       <TrustedCompanies />
       <Features />
       <PopularCategories />
+      <FeaturedJobs />
       <Testimonials />
     </>
   );
