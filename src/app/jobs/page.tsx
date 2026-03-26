@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, MapPin, Filter, Clock, DollarSign, Bookmark, ChevronLeft, ChevronRight, X } from 'lucide-react';
@@ -15,7 +14,7 @@ const SALARY_RANGES = [
 ];
 const JOBS_PER_PAGE = 10;
 
-export default function JobsPage() {
+function JobsList() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -37,7 +36,7 @@ export default function JobsPage() {
     const cat = searchParams.get('category');
     // no type param in URL but category is handled server-side
     void cat;
-  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch jobs whenever relevant filters change
   const fetchJobs = useCallback(() => {
@@ -336,11 +335,10 @@ export default function JobsPage() {
                     key={page}
                     id={`jobs-page-${page}-btn`}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-colors ${
-                      currentPage === page
-                        ? 'bg-primary-600 text-white shadow-soft'
-                        : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
-                    }`}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-colors ${currentPage === page
+                      ? 'bg-primary-600 text-white shadow-soft'
+                      : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
+                      }`}
                   >
                     {page}
                   </button>
@@ -368,4 +366,12 @@ export default function JobsPage() {
       </div>
     </div>
   );
+}
+
+export default function JobsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JobsList />
+    </Suspense>
+  )
 }
