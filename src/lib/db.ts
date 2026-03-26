@@ -1,3 +1,16 @@
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  passwordHash: string;
+  designation: string;
+  location: string;
+  portfolio: string;
+  avatar: string;
+  createdAt: string;
+}
+
 export interface Job {
   id: string;
   title: string;
@@ -54,6 +67,7 @@ export interface Profile {
 
 const globalForDb = globalThis as unknown as {
   mockDb: {
+    users: User[];
     jobs: Job[];
     proposals: Proposal[];
     posts: Post[];
@@ -64,6 +78,7 @@ const globalForDb = globalThis as unknown as {
 
 if (!globalForDb.mockDb) {
   globalForDb.mockDb = {
+    users: [],
     jobs: [
       {
         id: "1",

@@ -45,10 +45,10 @@ export default function Navbar() {
                </button>
             </div>
             
-            <Link href="/profile" className="text-gray-600 font-medium hover:text-gray-900 px-4 py-2">
+            <Link href="/login" className="text-gray-600 font-medium hover:text-gray-900 px-4 py-2">
               Login
             </Link>
-            <Link href="/profile" className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-soft transition-all hover:-translate-y-0.5">
+            <Link href="/register" className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-soft transition-all hover:-translate-y-0.5">
               Sign Up
             </Link>
           </div>
@@ -76,8 +76,8 @@ export default function Navbar() {
             <Link href="/profile" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50">Profile</Link>
           </div>
           <div className="pt-4 pb-4 border-t border-gray-200 px-4 flex flex-col gap-2">
-            <Link href="/profile" className="block text-center px-4 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Login</Link>
-            <Link href="/profile" className="block text-center px-4 py-2 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg">Sign Up</Link>
+            <Link href="/login" className="block text-center px-4 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Login</Link>
+            <Link href="/register" className="block text-center px-4 py-2 text-base font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg">Sign Up</Link>
           </div>
         </div>
       )}
