@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { MoreHorizontal, ThumbsUp, MessageCircle, Share2, Send, Loader2 } from 'lucide-react';
 import FeedFrofile from '@/components/pages/feed/profile/Profile';
+import TrendingJobs from '@/components/pages/feed/Trending/TrendingJobs';
 
 interface Post {
   id: string;
@@ -258,6 +259,7 @@ export default function SocialFeedPage() {
         {/* Right Sidebar */}
         <div className="hidden lg:block lg:w-1/3">
           <FeedFrofile />
+          <TrendingJobs />
         </div>
       </div>
     </div>
