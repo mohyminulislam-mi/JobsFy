@@ -12,7 +12,7 @@ export async function POST(
     return NextResponse.json({ error: "Post not found" }, { status: 404 });
   }
 
-  post.likes += 1; // Simplistic like count logic (avoids toggle logic for mock)
+  post.likes += 1;
 
   return NextResponse.json({ success: true, likes: post.likes });
 }

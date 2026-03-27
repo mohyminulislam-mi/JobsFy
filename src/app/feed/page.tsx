@@ -1,11 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import {
-  MoreHorizontal, ThumbsUp, MessageCircle, Share2, Send,
-  Plus, Briefcase, UserPlus, Loader2
-} from 'lucide-react';
+import { MoreHorizontal, ThumbsUp, MessageCircle, Share2, Send, Loader2 } from 'lucide-react';
+import FeedFrofile from '@/components/pages/feed/profile/Profile';
 
 interface Post {
   id: string;
@@ -61,7 +58,7 @@ export default function SocialFeedPage() {
       createdAt: new Date().toISOString(),
     };
 
-    // Optimistic update - immediately show at top
+    // immediately update  show at top
     setPosts((prev) => [optimisticPost, ...prev]);
     const savedContent = postContent;
     setPostContent('');
@@ -75,12 +72,10 @@ export default function SocialFeedPage() {
         body: JSON.stringify({ content: savedContent }),
       });
       const confirmed: Post = await res.json();
-      // Replace optimistic post with real one
       setPosts((prev) =>
         prev.map((p) => (p.id === optimisticPost.id ? confirmed : p))
       );
     } catch {
-      // Rollback on failure
       setPosts((prev) => prev.filter((p) => p.id !== optimisticPost.id));
       setPostContent(savedContent);
       setError('Failed to publish post. Please try again.');
@@ -105,37 +100,9 @@ export default function SocialFeedPage() {
 
   return (
     <div className="bg-gray-50 flex-grow py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
-
-        {/* Left Sidebar */}
-        <div className="hidden lg:block lg:w-1/4">
-          <div className="bg-white rounded-2xl shadow-soft border border-gray-100 overflow-hidden sticky top-24">
-            <div className="h-20 bg-gradient-to-r from-primary-400 to-indigo-500" />
-            <div className="px-6 pb-6 relative">
-              <div className="w-20 h-20 rounded-full border-4 border-white bg-gray-200 absolute -top-10 left-1/2 -translate-x-1/2 overflow-hidden">
-                <img src="https://i.pravatar.cc/150?u=current_user" alt="Profile" className="w-full h-full object-cover" />
-              </div>
-              <div className="pt-14 text-center">
-                <h3 className="text-lg font-bold text-gray-900">Current User</h3>
-                <p className="text-gray-500 text-sm mb-4">Senior Software Engineer</p>
-                <div className="text-sm border-t border-gray-100 pt-4 flex justify-between text-gray-600 mb-2">
-                  <span>Profile viewers</span>
-                  <span className="font-bold text-primary-600">324</span>
-                </div>
-                <div className="text-sm flex justify-between text-gray-600">
-                  <span>Post impressions</span>
-                  <span className="font-bold text-primary-600">1,209</span>
-                </div>
-              </div>
-              <Link href="/profile" className="w-full mt-6 bg-gray-50 text-gray-700 py-2 rounded-xl font-medium block text-center border border-gray-200 hover:bg-gray-100 transition-colors">
-                My Profile
-              </Link>
-            </div>
-          </div>
-        </div>
-
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
         {/* Main Feed */}
-        <div className="lg:w-2/4 flex flex-col gap-6">
+        <div className="lg:w-2/3 flex flex-col gap-6">
 
           {/* Error banner */}
           {error && (
@@ -195,7 +162,7 @@ export default function SocialFeedPage() {
           {/* Sort indicator */}
           <div className="flex items-center gap-4 text-xs font-semibold text-gray-400 uppercase tracking-widest my-2">
             <div className="flex-1 border-t border-gray-200" />
-            Sort by: Top <MoreHorizontal className="w-4 h-4 ml-1 cursor-pointer" />
+            Latest Post <MoreHorizontal className="w-4 h-4 ml-1 cursor-pointer" />
           </div>
 
           {/* Posts */}
@@ -265,11 +232,10 @@ export default function SocialFeedPage() {
                   <div className="flex justify-between md:justify-start md:gap-8 pt-1">
                     <button
                       onClick={() => handleLike(post.id)}
-                      className={`flex items-center gap-2 p-2 rounded-lg transition-colors font-medium text-sm flex-1 md:flex-none justify-center ${
-                        likedPosts.has(post.id)
-                          ? 'text-primary-600 hover:bg-primary-50'
-                          : 'text-gray-600 hover:bg-gray-50'
-                      }`}
+                      className={`flex items-center gap-2 p-2 rounded-lg transition-colors font-medium text-sm flex-1 md:flex-none justify-center ${likedPosts.has(post.id)
+                        ? 'text-primary-600 hover:bg-primary-50'
+                        : 'text-gray-600 hover:bg-gray-50'
+                        }`}
                     >
                       <ThumbsUp className={`w-5 h-5 ${likedPosts.has(post.id) ? 'fill-primary-600' : ''}`} />
                       {likedPosts.has(post.id) ? 'Liked' : 'Like'}
@@ -289,49 +255,10 @@ export default function SocialFeedPage() {
             ))
           )}
         </div>
-
         {/* Right Sidebar */}
-        <div className="lg:w-1/4 flex flex-col gap-6 w-full">
-          <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 sticky top-24">
-            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              Trending on Jobfy <Briefcase className="w-5 h-5 text-gray-400" />
-            </h3>
-            <ul className="space-y-4">
-              {[
-                { title: '#ReactDevelopers', jobs: '2,401 open roles' },
-                { title: '#RemoteWork', jobs: '15,200 open roles' },
-                { title: 'UX Design Trends 2025', jobs: '12k discussions' },
-                { title: '#AIinTech', jobs: '5,000 open roles' },
-              ].map((trend, idx) => (
-                <li key={idx} className="group cursor-pointer">
-                  <p className="font-semibold text-gray-800 text-sm group-hover:text-primary-600 transition-colors">{trend.title}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{trend.jobs}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 sticky top-[380px]">
-            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              Add to your feed <UserPlus className="w-5 h-5 text-gray-400" />
-            </h3>
-            <ul className="space-y-4">
-              {[1, 2, 3].map((user) => (
-                <li key={user} className="flex gap-3">
-                  <img src={`https://i.pravatar.cc/150?img=${user + 50}`} alt="Suggested user" className="w-10 h-10 rounded-full object-cover border border-gray-100" />
-                  <div>
-                    <h5 className="font-bold text-sm text-gray-900 leading-tight">David Miller</h5>
-                    <p className="text-xs text-gray-500 line-clamp-1 mb-1">Recruiter at Google</p>
-                    <button className="flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
-                      <Plus className="w-3 h-3" /> Follow
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="hidden lg:block lg:w-1/3">
+          <FeedFrofile />
         </div>
-
       </div>
     </div>
   );

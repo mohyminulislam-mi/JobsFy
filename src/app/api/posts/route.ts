@@ -4,7 +4,6 @@ import { randomUUID } from "crypto";
 
 export async function GET() {
   await new Promise((resolve) => setTimeout(resolve, 500));
-  // Return posts sorted by newest first
   const sortedPosts = [...db.posts].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
@@ -21,7 +20,7 @@ export async function POST(request: Request) {
 
     const newPost = {
       id: randomUUID(),
-      authorId: "1", // current user mock
+      authorId: "1",
       authorName: db.profiles[0].name,
       authorAvatar: db.profiles[0].avatar,
       content,
