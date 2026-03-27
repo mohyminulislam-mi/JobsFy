@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const FeedFrofile = () => {
     return (
-        <div className="bg-white rounded-2xl shadow-soft border border-gray-100 overflow-hidden sticky top-24">
+        <div className="bg-white rounded-2xl shadow-soft border border-gray-100 overflow-hidden sticky top-24 z-10">
             <div className="h-20 bg-gradient-to-r from-primary-400 to-indigo-500" />
             <div className="px-6 pb-6 relative">
                 <div className="w-20 h-20 rounded-full border-4 border-white bg-gray-200 absolute -top-10 left-1/2 -translate-x-1/2 overflow-hidden">

@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import JobsList from "./joblist";
-
+import Loading from "../loading";
 
 export default function JobsPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      < JobsList />
+    <Suspense fallback={<Loading />}>
+      <JobsList />
     </Suspense>
-  )
+  );
 }

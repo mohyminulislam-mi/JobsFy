@@ -259,7 +259,7 @@ export default function SocialFeedPage() {
         {/* Right Sidebar */}
         <div className="hidden lg:block lg:w-1/3">
           <FeedFrofile />
-          <TrendingJobs />
+          {/* <TrendingJobs /> */}
         </div>
       </div>
     </div>
